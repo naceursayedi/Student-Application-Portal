@@ -1,0 +1,22 @@
+{    
+  "session": {
+    "tokenKey": "r5u8x/A?D(G+KbPdSgVkYp3s6v9y$B&E",
+    "timeout": 300
+  },
+  "db": {
+    "dbConfig": {
+      "host": "localhost",
+      "port": 27017,
+      "dbName": "SemesterProject"
+    },
+    "credit": {
+      "initialLimit": 100,
+      "initialDays": 1
+    },
+    "connectionString": "mongodb://localhost/SemesterProject",
+    "connectionOptions": {
+      "useNewUrlParser": true,
+      "useUnifiedTopology": true
+    }
+  }
+}
