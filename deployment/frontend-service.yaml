@@ -1,0 +1,13 @@
+apiVersion: "v1"
+kind: "Service"
+metadata:
+  name: "frontend-naceur"
+  namespace: "pwa-naceur"
+spec:
+  selector:
+    app: "frontend-naceur"
+  ports:
+    - protocol: TCP
+      name: "http"
+      port: 3000
+  type: "ClusterIP"

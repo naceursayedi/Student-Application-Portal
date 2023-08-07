@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-sayedi
+  namespace: pwa-naceur
+spec:
+  selector:
+    matchLabels:
+      app: backend-sayedi
+  replicas: 3 # run 3 pods
+  template:
+    metadata:
+      labels:
+        app: backend-sayedi
+    spec:
+      containers:
+        - name: backend-sayedi
+          image: registry.bht-berlin.de:443/s85975/studierendenbewerberportal-deployment
+          ports:
+            - containerPort: 80

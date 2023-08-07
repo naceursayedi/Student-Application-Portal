@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-naceur
+  namespace: pwa-naceur
+spec:
+  selector:
+    matchLabels:
+      app: frontend-naceur
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: frontend-naceur
+    spec:
+      containers:
+        - name: frontend-naceur
+          image: registry.bht-berlin.de:443/s85975/studierendenbewerberportal-deployment-frontend
+          ports:
+            - containerPort: 3000

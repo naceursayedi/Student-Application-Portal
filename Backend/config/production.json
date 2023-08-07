@@ -1,0 +1,10 @@
+{
+    "db": {
+    "connectionString": "mongodb://localhost/SemesterProject",
+    "connectionOptions": {
+    "useNewUrlParser": true,
+    "useUnifiedTopology": true,
+    "useCreateIndex":true
+    }
+    }
+    }

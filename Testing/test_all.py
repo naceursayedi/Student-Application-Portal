@@ -1,0 +1,10 @@
+# Import necessary packages and functions
+import pytest
+
+# Import test functions from individual test files
+from test_login_logout import test_login_logout
+from test_user_management import test_create_user, test_edit_user
+from test_degree_course_management import test_create_degree_course, test_update_degree_course
+from test_degree_course_application_admin import test_create_degree_course_application_admin, test_delete_degree_course_application_admin
+from test_degree_course_application_user import test_login_user, test_access_rights_user, test_create_degree_course_application_user, test_delete_degree_course_application_user
+from test_cleanup_created_items import test_delete_user_as_admin, test_delete_degree_course_admin

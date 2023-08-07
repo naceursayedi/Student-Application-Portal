@@ -1,0 +1,22 @@
+{
+  "session": {
+    "tokenKey": "r5u8x/A?D(G+KbPdSgVkYp3s6v9y$B&E",
+    "timeout": 300
+  },
+  "db": {
+    "dbConfig": {
+      "host": "mongo-nodeport-svc",
+      "port": 27017,
+      "dbName": "SemesterProject"
+    },
+    "credit": {
+      "initialLimit": 100,
+      "initialDays": 1
+    },
+    "connectionString": "mongodb://mongo-nodeport-svc/SemesterProject",
+    "connectionOptions": {
+      "useNewUrlParser": true,
+      "useUnifiedTopology": true
+    }
+  }
+}

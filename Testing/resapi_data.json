@@ -1,0 +1,51 @@
+{
+    "login": {
+        "admin": {
+            "username": "admin",
+            "pwd": "123"
+        },
+        "user": {
+            "username": "Naceursa",
+            "pwd": "123"
+        }
+    },
+    "users": {
+        "user1": {
+            "userID": "Naceursa",
+            "firstName": "Naceur",
+            "lastName": "Sayedi",
+            "password": "123",
+            "isAdministrator": false
+        },
+        "edited_user1": {
+            "firstName": "Max",
+            "lastName": "Mustermann"
+        }
+    },
+    "degreeCourses": {
+        "degreeCourse1": {
+            "universityName": "Beuth Hochschule für Technik Berlin",
+            "universityShortName": "Beuth HS",
+            "departmentName": "Informatik und Medien",
+            "departmentShortName": "FB VI",
+            "name": "Orchideenzucht Bachelor",
+            "shortName": "OZ-BA"
+        },
+        "edited_degreeCourse1": {
+            "name": "MedienInformatik Bachelor",
+            "shortName": "MI-BA"
+        }
+    },
+    "degreeCourseApplication": {
+        "application_admin": {
+            "applicantUserID": "Naceursa",
+            "targetPeriodYear": 2023,
+            "targetPeriodShortName": "WiSe"
+        },
+        "application_user": {
+            "applicantUserID": "Naceursa",
+            "targetPeriodYear": 2023,
+            "targetPeriodShortName": "SoSe"
+        }
+    }
+}

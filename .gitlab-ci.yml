@@ -1,0 +1,33 @@
+image:
+  name: docker/compose:1.29.2
+  entrypoint: ["/bin/sh", "-c"]
+
+services:
+  - name: docker:19.03.12-dind
+    alias: docker
+
+stages:
+  - build
+  - test
+
+default:
+  tags:
+    - studierendenbewerberportal
+    - dockerizing
+variables:
+  DOCKER_TLS_CERTDIR: ""
+  DOCKER_HOST: "tcp://docker:2375" # dind with TLS disabled
+  CONTAINER_TEST_IMAGE: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
+
+before_script:
+  - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+
+build:
+  stage: build
+  script:
+    - docker-compose build
+
+test:
+  stage: test
+  script:
+    - docker-compose run --rm test

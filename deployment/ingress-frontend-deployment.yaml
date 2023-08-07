@@ -1,0 +1,23 @@
+apiVersion: "networking.k8s.io/v1"
+kind: "Ingress"
+metadata:
+  name: "deployment-ingress-frontend"
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+  namespace: pwa-naceur
+spec:
+  tls:
+    - hosts:
+        - "pwa-naceur.lehre.ris.bht-berlin.de"
+      secretName: "ssl-cert"
+  rules:
+    - host: "pwa-naceur.lehre.ris.bht-berlin.de"
+      http:
+        paths:
+          - path: "/"
+            pathType: Prefix
+            backend:
+              service:
+                name: frontend-naceur
+                port:
+                  number: 3000

@@ -1,0 +1,118 @@
+// Login mit Basic Authentication als admin mit korrekten Credentials admin:123
+###
+# @name loginAdminCorrect
+GET http://localhost/api/authenticate
+Authorization: Basic YWRtaW46MTIz
+
+// Login mit Basic Authentication als admin mit falschen Credentials
+// Hinweis: Der REST-Client überführt das Passwort automatisch nach Base64
+###
+GET http://localhost/api/authenticate
+Authorization: Basic NaceurSa:123
+
+@adminToken = {{loginAdminCorrect.response.headers.Authorization}}
+
+### Auflisten aller Nutzer, ohne dass ein Token übergeben wird --> Anfrage scheitert mit 401 
+http://localhost/api/users
+
+### Auflisten aller Nutzer mit Token von admin
+https://localhost/api/users
+Authorization: {{adminToken}}
+
+### Lege neuen user manfred an
+POST https://localhost/api/users/
+Authorization: {{adminToken}}
+Content-Type: application/json
+
+{
+    "userID": "Naceur Sa6",
+    "firstName": "Naceur",
+    "lastName": "Sayedi",
+    "password": "123",
+     "isAdministrator": true
+}
+
+### Abrufen des angelegten Users mit dem Admin-Token
+GET http://localhost/api/users/manfred
+Authorization: {{adminToken}}
+
+// Ändere beim zweiten User den User-Name. Zur Selektion des Users verwende die userID.
+###
+PUT https://localhost/api/users/sa
+Content-Type: application/json
+Authorization:{{adminToken}}
+
+{
+
+    "firstName": "sayedi",
+    "lastName": "sayedi"
+
+ 
+}
+
+// Login mit Basic Authentication als manfred mit korrekten Credentials
+###
+# @name loginManfredCorrect
+GET https://localhost/api/authenticate
+Authorization: Basic manfred:asdf
+
+@manfredToken = {{loginManfredCorrect.response.headers.Authorization}}
+
+### Auflisten aller Nutzer mit Token von manfred, das sollte nicht möglich sein
+GET http://localhost/api/users
+Authorization: {{manfredToken}}
+
+### Auflisten aller Studiengänge
+GET https://localhost/api/degreeCourses
+Authorization: {{manfredToken}}
+
+// Lege einen Studiengang an
+###
+# @name createDegreeCourseRequest
+POST http://localhost/api/degreeCourses
+Authorization:  {{adminToken}}
+Content-Type: application/json
+
+{
+
+    "universityName": "Hochschule für Technik und Wirtschaft Berlin",
+    "universityShortName": "HTW Berlin",
+    "departmentName": "Informatik und Medien",
+    "departmentShortName": "FB VI",
+    "name": " Informatik Bachelor",
+    "shortName": "I-BA"
+}
+
+###
+@degreeCourseID = {{createDegreeCourseRequest.response.body._id}}
+
+### Auflisten aller Studiengänge, es sollte jetzt einen geben
+http://localhost/api/degreeCourses
+Authorization: {{manfredToken}}
+
+
+### Abrufen von dem angelegten Studiengang
+http://localhost/api/degreeCourses/{{degreeCourseID}}
+Authorization: {{manfredToken}}
+
+
+### Ändere den Namen des Studiengangs
+PUT http://localhost/api/degreeCourses/{{degreeCourseID}}
+Authorization: {{adminToken}}
+Content-Type: application/json
+
+{
+    "universityShortName": "TU Berlin"
+}
+
+### Auflisten der Studiengänge einer bestimmten Hochschule
+GET http://localhost/api/degreeCourses?universityShortName=TU Berlin
+Authorization: {{adminToken}}
+
+### Lösche den angelegten Studiengang
+DELETE http://localhost/api/degreeCourses/{{degreeCourseID}}
+Authorization: {{manfredToken}}
+
+### Lösche den User manfred
+DELETE http://localhost/api/users/manfred
+Authorization: {{adminToken}}
